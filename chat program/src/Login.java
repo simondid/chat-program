@@ -10,15 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtName;
-	private JTextField textAddress;
+	private JTextField txtAddress;
 	private JLabel lblAddress;
-	private JTextField textPort;
+	private JTextField txtPort;
 	private JLabel lblPort;
 
 	/**
@@ -68,26 +70,42 @@ public class Login extends JFrame {
 		lblName.setBounds(10, 28, 46, 14);
 		contentPane.add(lblName);
 		
-		textAddress = new JTextField();
-		textAddress.setBounds(64, 56, 86, 20);
-		contentPane.add(textAddress);
-		textAddress.setColumns(10);
+		txtAddress = new JTextField();
+		txtAddress.setBounds(64, 56, 86, 20);
+		contentPane.add(txtAddress);
+		txtAddress.setColumns(10);
 		
 		lblAddress = new JLabel("address");
 		lblAddress.setBounds(10, 59, 46, 14);
 		contentPane.add(lblAddress);
 		
-		textPort = new JTextField();
-		textPort.setBounds(64, 87, 86, 20);
-		contentPane.add(textPort);
-		textPort.setColumns(10);
+		txtPort = new JTextField();
+		txtPort.setBounds(64, 87, 86, 20);
+		contentPane.add(txtPort);
+		txtPort.setColumns(10);
 		
 		lblPort = new JLabel("Port");
 		lblPort.setBounds(10, 90, 46, 14);
 		contentPane.add(lblPort);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String name = txtName.getText();
+				String address = txtAddress.getText();
+				int port = Integer.parseInt(txtPort.getText());
+				
+				login(name, address, port);
+			}
+		});
 		btnLogin.setBounds(61, 128, 89, 23);
 		contentPane.add(btnLogin);
+	}
+	private void login(String name,String address,int port) {
+		// TODO Auto-generated method stub
+		dispose();
+		System.out.println(name+","+address+","+port);
+		new Client(name,address,port);
+		
 	}
 }
